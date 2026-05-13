@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deep Learning Poster</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue-main: #245C8F;
+      --blue-light: #E9F1F7;
+      --orange-main: #F48C42;
+      --orange-light: #FEF3EB;
+      --purple-main: #73458F;
+      --purple-light: #F3EAF6;
+      --green-main: #368853;
+      --green-light: #EBF4ED;
+      --text-dark: #222;
+      --text-gray: #444;
+      --bg-color: #FFFFFF;
+    }
+
+    @page {
+      size: A3 landscape;
+      margin: 0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      padding: 0;
+      margin: 0;
+    }
+
+    .poster {
+      width: 420mm;
+      height: 297mm;
+      background-color: var(--bg-color);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      padding: 30px 45px;
+      position: relative;
+    }
+
+    /* === TOP HEADER SECTION === */
+    .top-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .logo-container {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 3px solid #222;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      font-size: 10px;
+      font-weight: 700;
+      margin-right: 20px;
+    }
+    
+    .logo-container svg {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 5px;
+    }
+
+    .main-title-box {
+      flex: 1;
+      background-color: var(--blue-main);
+      color: white;
+      border-radius: 12px;
+      padding: 15px 20px;
+      text-align: center;
+    }
+
+    .main-title-box h1 {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      line-height: 1.2;
+    }
+
+    /* === SUB HEADER INFO === */
+    .sub-header {
+      display: flex;
+      justify-content: space-between;
+      border-top: 2px solid #ddd;
+      border-bottom: 2px solid #ddd;
+      padding: 12px 0;
+      margin-bottom: 25px;
+      font-size: 16px;
+      color: var(--text-dark);
+    }
+
+    .sub-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .sub-col.left {
+      max-width: 250px;
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 1.2;
+      border-right: 2px solid #ccc;
+      padding-right: 15px;
+    }
+
+    .sub-col.mid {
+      padding-left: 20px;
+    }
+
+    .sub-col.right {
+      border-left: 2px solid #ccc;
+      padding-left: 20px;
+    }
+
+    .sub-header p {
+      margin-bottom: 5px;
+    }
+    .sub-header p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* === GRID LAYOUT === */
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 30px;
+      height: 820px;
+    }
+
+    .box {
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      border: 3px solid transparent;
+    }
+
+    .box-header {
+      padding: 12px 15px;
+      color: white;
+      font-weight: 700;
+      font-size: 18px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .box-content {
+      padding: 15px;
+      flex: 1;
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--text-gray);
+    }
+
+    /* Color Themes */
+    .box-blue {
+      border-color: var(--blue-main);
+      background-color: var(--blue-light);
+    }
+    .box-blue .box-header { background-color: var(--blue-main); }
+    
+    .box-orange {
+      border-color: var(--orange-main);
+      background-color: var(--orange-light);
+    }
+    .box-orange .box-header { background-color: var(--orange-main); }
+    
+    .box-purple {
+      border-color: var(--purple-main);
+      background-color: var(--purple-light);
+    }
+    .box-purple .box-header { background-color: var(--purple-main); }
+    
+    .box-green {
+      border-color: var(--green-main);
+      background-color: var(--green-light);
+    }
+    .box-green .box-header { background-color: var(--green-main); }
+
+    /* === REQ 1 CONTENT === */
+    .icon-list {
+      list-style: none;
+    }
+    .icon-list li {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+    .icon-list li svg {
+      width: 20px;
+      height: 20px;
+      margin-right: 10px;
+      fill: var(--blue-main);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .highlight {
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+    
+    .split-chart {
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+    }
+    .pie-chart {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: conic-gradient(#4CAF50 0% 75%, #FF9800 75% 87.5%, #F44336 87.5% 100%);
+      margin-right: 15px;
+    }
+    .split-legend {
+      font-size: 12px;
+    }
+
+    /* === REQ 2 CONTENT === */
+    .req2-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+    .model-info {
+      background: white;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    .architecture-box {
+      background: white;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      margin-top: 10px;
+      text-align: center;
+      font-size: 12px;
+    }
+    .hyper-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      font-size: 12px;
+    }
+    .hyper-table th, .hyper-table td {
+      border: 1px solid #ddd;
+      padding: 4px 6px;
+      text-align: left;
+    }
+    .hyper-table th {
+      background-color: #f5f5f5;
+    }
+
+    /* === REQ 3 CONTENT === */
+    .req3-split {
+      display: flex;
+      gap: 15px;
+      height: 100%;
+    }
+    .approach {
+      flex: 1;
+      background: white;
+      border-radius: 8px;
+      padding: 12px;
+      border: 1px solid #ccc;
+      display: flex;
+      flex-direction: column;
+    }
+    .approach-title {
+      font-weight: 700;
+      font-size: 13px;
+      text-align: center;
+      margin-bottom: 8px;
+      color: var(--purple-main);
+      border-bottom: 2px dashed #ccc;
+      padding-bottom: 5px;
+    }
+    .metrics-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 10px;
+      font-size: 11px;
+    }
+    .metrics-table th, .metrics-table td {
+      border: 1px solid #ddd;
+      padding: 4px;
+      text-align: center;
+    }
+    .metrics-table th {
+      background-color: var(--purple-light);
+    }
+    
+    .cm-wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .cm-title {
+      font-size: 11px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .cm-grid {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      width: 150px;
+      height: 150px;
+      border: 1px solid #999;
+    }
+    .cm-cell {
+      border: 1px solid #eee;
+      background-color: #fafafa;
+    }
+    /* Diagonal darker */
+    .cm-cell:nth-child(11n+1) { background-color: rgba(115, 69, 143, 0.4); }
+
+    /* === REQ 4 CONTENT === */
+    .req4-top {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 20px;
+      height: 220px;
+    }
+    .chart-container {
+      flex: 1.5;
+      background: white;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+    }
+    .insights-box {
+      flex: 1;
+      background: white;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      font-size: 12px;
+      overflow: auto;
+    }
+    .chart-area {
+      flex: 1;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-around;
+      padding-top: 15px;
+    }
+    .bar-group {
+      display: flex;
+      align-items: flex-end;
+      gap: 4px;
+      height: 100%;
+    }
+    .bar-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      height: 100%;
+    }
+    .bar {
+      width: 25px;
+      background-color: var(--blue-main);
+      border-radius: 3px 3px 0 0;
+      position: relative;
+    }
+    .bar.app2 {
+      background-color: var(--orange-main);
+    }
+    .bar-label {
+      font-size: 9px;
+      margin-bottom: 2px;
+      font-weight: bold;
+    }
+    .metric-name {
+      font-size: 10px;
+      margin-top: 5px;
+      font-weight: 600;
+    }
+    .chart-legend {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      font-size: 11px;
+      margin-bottom: 5px;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .legend-color {
+      width: 12px;
+      height: 12px;
+    }
+    
+    .insight-list {
+      list-style-type: decimal;
+      padding-left: 20px;
+    }
+    .insight-list li {
+      margin-bottom: 6px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="poster">
+    
+    <!-- TOP HEADER -->
+    <div class="top-header">
+      <div class="logo-container">
+        <!-- SVG Logo Placeholder -->
+        <svg viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="45" fill="none" stroke="#222" stroke-width="2"/>
+          <path d="M 20 50 Q 50 10 80 50 Q 50 90 20 50" fill="none" stroke="#222" stroke-width="2"/>
+          <circle cx="50" cy="50" r="15" fill="#222"/>
+        </svg>
+        COLLEGE LOGO
+      </div>
+      <div class="main-title-box">
+        <h1>COMPARATIVE STUDY: END-TO-END DEEP LEARNING<br>VS. DL-BASED FEATURE LEARNING</h1>
+      </div>
+    </div>
+
+    <!-- SUB HEADER -->
+    <div class="sub-header">
+      <div class="sub-col left">
+        College of Computing<br>and Information<br>Technology
+      </div>
+      <div class="sub-col mid">
+        <p><span class="highlight">Course:</span> Deep Learning | CAI3105</p>
+        <p><span class="highlight">Department:</span> Artificial Intelligence</p>
+      </div>
+      <div class="sub-col right">
+        <p><span class="highlight">Lecturer:</span> Prof. Nashwa El-Bendary</p>
+        <p><span class="highlight">Team Members:</span> Adham Mohamed Saad (ID: 231011220)</p>
+      </div>
+    </div>
+
+    <!-- MAIN GRID -->
+    <div class="content-grid">
+      
+      <!-- BOX 1: DATASET -->
+      <div class="box box-blue">
+        <div class="box-header">REQUIREMENT 1: DATASET SELECTION & TECHNICAL SPECIFICATIONS</div>
+        <div class="box-content">
+          <ul class="icon-list">
+            <li>
+              <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 4.24 2 7v10c0 2.76 4.48 5 10 5s10-2.24 10-5V7c0-2.76-4.48-5-10-5zm0 3c4.42 0 8 1.34 8 3s-3.58 3-8 3-8-1.34-8-3 3.58-3 8-3zm0 15c-4.42 0-8-1.34-8-3v-2.3c2.04 1.35 5.14 2.3 8 2.3s5.96-.95 8-2.3V17c0 1.66-3.58 3-8 3zm0-5c-4.42 0-8-1.34-8-3v-2.3c2.04 1.35 5.14 2.3 8 2.3s5.96-.95 8-2.3V12c0 1.66-3.58 3-8 3z"/></svg>
+              <div>
+                <span class="highlight">Dataset Metadata:</span> CIFAR-10<br>
+                Source: tf.keras.datasets.cifar10<br>
+                Domain: General Object Recognition<br>
+                Total Samples: 60,000 images
+              </div>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 9h-2V7h-2v5H6v2h2v5h2v-5h2v-2z"/></svg>
+              <div>
+                <span class="highlight">Technical Specifications:</span><br>
+                Original Res: 32×32 | Resized Res: 128×128<br>
+                Channels: RGB (3) | Classes: 10
+              </div>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24"><path d="M19 8l-4 4h3c0 3.31-2.69 6-6 6-1.01 0-1.97-.25-2.8-.7l-1.46 1.46C8.97 19.54 10.43 20 12 20c4.42 0 8-3.58 8-8h3l-4-4zM6 12c0-3.31 2.69-6 6-6 1.01 0 1.97.25 2.8.7l1.46-1.46C15.03 4.46 13.57 4 12 4c-4.42 0-8 3.58-8 8H1l4 4 4-4H6z"/></svg>
+              <div>
+                <span class="highlight">Data Preprocessing & Augmentation:</span><br>
+                Resize via tf.image.resize | MobileNet preprocess_input [-1, 1]<br>
+                Augmentation (Train only): Random Horizontal Flip, Random Rotation ±15%, Random Zoom ±10%, Random Contrast ±10%
+              </div>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24"><path d="M11 2v20c-5.07-.5-9-4.79-9-10s3.93-9.5 9-10zm2.03 0v8.99H22c-.47-4.74-4.24-8.52-8.97-8.99zm0 11.01V22c4.74-.47 8.5-4.25 8.97-8.99h-8.97z"/></svg>
+              <div>
+                <span class="highlight">Data Splitting:</span>
+                <div class="split-chart">
+                  <div class="pie-chart"></div>
+                  <div class="split-legend">
+                    <span style="color:#4CAF50; font-weight:bold;">Train:</span> 6000 imgs (75%)<br>
+                    <span style="color:#FF9800; font-weight:bold;">Val:</span> 1000 imgs (12.5%)<br>
+                    <span style="color:#F44336; font-weight:bold;">Test:</span> 1000 imgs (12.5%)
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- BOX 2: MODEL -->
+      <div class="box box-orange">
+        <div class="box-header">REQUIREMENT 2: DL MODEL SELECTION</div>
+        <div class="box-content">
+          <div class="req2-grid">
+            
+            <div>
+              <div class="model-info">
+                <p><span class="highlight">Selected Model:</span> MobileNetV1</p>
+                <p><span class="highlight">Pre-trained on:</span> ImageNet (1.2M imgs)</p>
+                <p><span class="highlight">Parameters:</span> ~4.2M (Lightweight)</p>
+                <p><span class="highlight">Top-1 Acc:</span> ~70.6%</p>
+              </div>
+              
+              <div class="architecture-box">
+                <strong>Technical Justification:</strong><br>
+                Depthwise Separable Convolutions<br>
+                ~8-9x fewer FLOPs<br>
+                Ideal for mobile/edge devices<br>
+                <br>
+                <strong>Architecture:</strong><br>
+                1 Standard Conv Block<br>
+                13 Depthwise Separable Blocks<br>
+                Global Average Pooling
+              </div>
+            </div>
+
+            <div>
+              <table class="hyper-table">
+                <tr><th colspan="2" style="text-align:center;">Hyperparameters Table</th></tr>
+                <tr><td><strong>Input Shape</strong></td><td>(128, 128, 3)</td></tr>
+                <tr><td><strong>Optimizer</strong></td><td>Adam (Cosine Decay)</td></tr>
+                <tr><td><strong>Learning Rate</strong></td><td>1e-3 → 1e-5</td></tr>
+                <tr><td><strong>Batch Size</strong></td><td>64</td></tr>
+                <tr><td><strong>Epochs</strong></td><td>5 + 2 fine-tune</td></tr>
+                <tr><td><strong>Loss</strong></td><td>Sparse Cat. Crossentropy</td></tr>
+                <tr><td><strong>Dropout</strong></td><td>0.30 / 0.20</td></tr>
+                <tr><td><strong>Frozen Layers (App.1)</strong></td><td>All (100%)</td></tr>
+                <tr><td><strong>Fine-tuned (App.2)</strong></td><td>Last 5 layers</td></tr>
+                <tr><td><strong>ML Classifier (App.1)</strong></td><td>SVM (RBF kernel, C=10)</td></tr>
+                <tr><td><strong>PCA Components</strong></td><td>128</td></tr>
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- BOX 3: IMPLEMENTATION -->
+      <div class="box box-purple">
+        <div class="box-header">REQUIREMENT 3: IMPLEMENTATION FRAMEWORK</div>
+        <div class="box-content">
+          <div class="req3-split">
+            
+            <!-- App 1 -->
+            <div class="approach">
+              <div class="approach-title">APPROACH-1: DL-FEATURES + ML CLASSIFIER</div>
+              <ul style="font-size:10px; margin-bottom:8px; padding-left:15px; color:#555;">
+                <li>Load frozen MobileNetV1 &rarr; GAP (1024D)</li>
+                <li>Extract features from non-augmented data</li>
+                <li>StandardScaler + PCA (128D) &rarr; SVM (RBF)</li>
+              </ul>
+              
+              <table class="metrics-table">
+                <tr><th>Metric</th><th>Score</th></tr>
+                <tr><td>Accuracy</td><td>86.90%</td></tr>
+                <tr><td>Precision</td><td>87.00%</td></tr>
+                <tr><td>Recall</td><td>86.90%</td></tr>
+                <tr><td>F1-Score</td><td>86.93%</td></tr>
+                <tr><td>Train Time</td><td>11.8s</td></tr>
+              </table>
+              
+              <div class="cm-wrapper">
+                <div class="cm-title">Confusion Matrix</div>
+                <div class="cm-grid">
+                  <!-- 100 cells generated via CSS -->
+                  <script>for(let i=0; i<100; i++) document.write('<div class="cm-cell"></div>');</script>
+                </div>
+                <div style="font-size:8px; margin-top:2px;">10 Classes (airplane...truck)</div>
+              </div>
+            </div>
+
+            <!-- App 2 -->
+            <div class="approach">
+              <div class="approach-title">APPROACH-2: END-TO-END DEEP LEARNING</div>
+              <ul style="font-size:10px; margin-bottom:8px; padding-left:15px; color:#555;">
+                <li>MobileNetV1 backbone + Custom Dense Head</li>
+                <li>Phase 1: Train head (5 ep)</li>
+                <li>Phase 2: Fine-tune last 5 layers (2 ep)</li>
+              </ul>
+              
+              <table class="metrics-table">
+                <tr><th>Metric</th><th>Score</th></tr>
+                <tr><td>Accuracy</td><td>~88.00%</td></tr>
+                <tr><td>Precision</td><td>~88.00%</td></tr>
+                <tr><td>Recall</td><td>~88.00%</td></tr>
+                <tr><td>F1-Score</td><td>~88.00%</td></tr>
+                <tr><td>Train Time</td><td>~20 min (GPU)</td></tr>
+              </table>
+              
+              <div class="cm-wrapper">
+                <div class="cm-title">Confusion Matrix</div>
+                <div class="cm-grid">
+                  <!-- 100 cells generated via CSS -->
+                  <script>for(let i=0; i<100; i++) document.write('<div class="cm-cell"></div>');</script>
+                </div>
+                <div style="font-size:8px; margin-top:2px;">10 Classes (airplane...truck)</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- BOX 4: INSIGHTS -->
+      <div class="box box-green">
+        <div class="box-header">REQUIREMENT 4: COMPARATIVE ANALYSIS & INSIGHTS</div>
+        <div class="box-content">
+          
+          <div class="req4-top">
+            <div class="chart-container">
+              <div class="chart-legend">
+                <div class="legend-item">
+                  <div class="legend-color" style="background: var(--blue-main)"></div>
+                  <span>App 1 (SVM)</span>
+                </div>
+                <div class="legend-item">
+                  <div class="legend-color" style="background: var(--orange-main)"></div>
+                  <span>App 2 (E2E)</span>
+                </div>
+              </div>
+              <div class="chart-area">
+                
+                <!-- Metric 1 -->
+                <div class="bar-wrapper">
+                  <div class="bar-group">
+                    <div class="bar-wrapper"><div class="bar-label">86.9%</div><div class="bar" style="height: 120px;"></div></div>
+                    <div class="bar-wrapper"><div class="bar-label">88.0%</div><div class="bar app2" style="height: 125px;"></div></div>
+                  </div>
+                  <div class="metric-name">Accuracy</div>
+                </div>
+
+                <!-- Metric 2 -->
+                <div class="bar-wrapper">
+                  <div class="bar-group">
+                    <div class="bar-wrapper"><div class="bar-label">87.0%</div><div class="bar" style="height: 121px;"></div></div>
+                    <div class="bar-wrapper"><div class="bar-label">88.0%</div><div class="bar app2" style="height: 125px;"></div></div>
+                  </div>
+                  <div class="metric-name">Precision</div>
+                </div>
+
+                <!-- Metric 3 -->
+                <div class="bar-wrapper">
+                  <div class="bar-group">
+                    <div class="bar-wrapper"><div class="bar-label">86.9%</div><div class="bar" style="height: 120px;"></div></div>
+                    <div class="bar-wrapper"><div class="bar-label">88.0%</div><div class="bar app2" style="height: 125px;"></div></div>
+                  </div>
+                  <div class="metric-name">Recall</div>
+                </div>
+
+                <!-- Metric 4 -->
+                <div class="bar-wrapper">
+                  <div class="bar-group">
+                    <div class="bar-wrapper"><div class="bar-label">86.9%</div><div class="bar" style="height: 120px;"></div></div>
+                    <div class="bar-wrapper"><div class="bar-label">88.0%</div><div class="bar app2" style="height: 125px;"></div></div>
+                  </div>
+                  <div class="metric-name">F1-Score</div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="insights-box">
+              <strong style="color:var(--green-main); display:block; margin-bottom:8px;">Performance Comparison</strong>
+              <table class="hyper-table" style="margin-bottom: 10px;">
+                <tr><th>Metric</th><th>App.1</th><th>App.2</th><th>Winner</th></tr>
+                <tr><td>Accuracy</td><td>86.90%</td><td>~88.0%</td><td>App.2</td></tr>
+                <tr><td>Train Time</td><td>11.8s</td><td>~20m</td><td>App.1</td></tr>
+              </table>
+            </div>
+          </div>
+
+          <div style="background: white; padding: 12px; border-radius: 8px; border: 1px solid #ccc;">
+            <strong style="color:var(--green-main); display:block; margin-bottom:5px;">Conclusion & 4 Key Insights:</strong>
+            <ol class="insight-list">
+              <li><strong>App.2 (E2E DL) achieves higher accuracy</strong> by adapting backbone features to CIFAR-10 via fine-tuning. App.1 (SVM) is only ~1-3pp behind with 100× faster training.</li>
+              <li><strong>App.1 advantages:</strong> trains in seconds, no GPU required, low overfitting. <strong>Limitation:</strong> fixed ImageNet features.<br>
+                  <strong>App.2 advantages:</strong> task-specific features, higher ceiling. <strong>Limitation:</strong> requires GPU, longer training.</li>
+              <li><strong>Time efficiency:</strong> App.1 is dramatically faster at 11.8 seconds vs ~20 minutes.</li>
+              <li><strong>Deployment Strategy:</strong> Mobile/Edge → App.1 (no GPU, fast inference). Cloud/GPU → App.2 (maximum accuracy).</li>
+            </ol>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Generate the 100 cells for the confusion matrices using vanilla JS so it works offline easily without multiple files -->
+  <script>
+    const grids = document.querySelectorAll('.cm-grid');
+    grids.forEach(grid => {
+      // Clear if not already empty (due to the inline script)
+      if(grid.children.length === 0) {
+        for(let i=0; i<100; i++) {
+          const cell = document.createElement('div');
+          cell.className = 'cm-cell';
+          grid.appendChild(cell);
+        }
+      }
+    });
+  </script>
+</body>
+</html>
